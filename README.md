@@ -15,7 +15,7 @@ To run CariKerja, follow these steps:
 ```
 
 ## Downlaod Application
-[GoogleDrive](https://drive.google.com/file/d/1KyrhhHMsXnj5y70BJS18spKUY3EhQLt4/view?usp=sharing)
+[GoogleDrive](https://drive.google.com/file/d/1vdTA5VTqdz2L-TVdJ_vqWHitwK65zomV/view?usp=sharing)
 
 ## Screenshoot
 <img width="480" alt="image" src="https://user-images.githubusercontent.com/11336853/233331800-bd17f6e2-4334-4980-9ce5-022002c61f69.png">
