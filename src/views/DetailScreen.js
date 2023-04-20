@@ -1,28 +1,37 @@
-import React, {useState} from 'react'
-import {Image, Linking, ScrollView, TouchableOpacity, View} from 'react-native'
+import React from 'react'
 import {
-  Appbar,
-  Button,
-  Card,
-  Text,
-} from 'react-native-paper'
-import HTMLView from 'react-native-htmlview';
-import ImageCompany from '../components/ImageCompany';
+  Linking,
+  ScrollView,
+  TouchableOpacity,
+  View,
+  useWindowDimensions,
+} from 'react-native'
+import {Appbar, Button, Card, Text} from 'react-native-paper'
+import RenderHtml from 'react-native-render-html'
+import ImageCompany from '../components/ImageCompany'
 
-const TextInfo = ({label, description, html}) => (
-  <View style={{ marginBottom: 16 }}>
-    <Text style={{fontWeight: 'bold', color: '#a1a1a1'}}>{label}</Text>
-    {
-      html ? <HTMLView
-        value={description}
-      /> : <Text>{description}</Text>
-    }
-  </View>
-)
+const TextInfo = ({label, description, html}) => {
+  const {width} = useWindowDimensions()
+  return (
+    <View style={{marginBottom: 16}}>
+      <Text style={{fontWeight: 'bold', color: '#a1a1a1'}}>{label}</Text>
+      {html ? (
+        <RenderHtml
+          source={{
+            html: description,
+          }}
+          contentWidth={width}
+        />
+      ) : (
+        <Text>{description}</Text>
+      )}
+    </View>
+  )
+}
 
 const DetailScreen = ({navigation, route}) => {
   const {item} = route.params
-  
+
   return (
     <View style={{flex: 1}}>
       <Appbar.Header style={{backgroundColor: '#0000'}}>
@@ -35,9 +44,8 @@ const DetailScreen = ({navigation, route}) => {
           flex: 1,
         }}
         contentContainerStyle={{
-          padding: 16
-        }}
-        >
+          padding: 16,
+        }}>
         <Text style={{marginBottom: 8, fontWeight: 'bold'}}>Company</Text>
         <Card>
           <View style={{flexDirection: 'row', paddingVertical: 16}}>
@@ -48,7 +56,8 @@ const DetailScreen = ({navigation, route}) => {
               <Text style={{fontWeight: 'bold'}}>{item?.title}</Text>
               <Text style={{color: '#a1a1a1'}}>{item?.company}</Text>
               {/* <Text style={{color: '#a1a1a1'}}>{item?.location}</Text> */}
-              <TouchableOpacity onPress={() => Linking.openURL(item.company_url)}>
+              <TouchableOpacity
+                onPress={() => Linking.openURL(item.company_url)}>
                 <Text
                   style={{
                     color: '#1393FF',
@@ -65,35 +74,29 @@ const DetailScreen = ({navigation, route}) => {
         </Text>
         <Card>
           <Card.Content>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <TextInfo 
-                label={'Created At'}
-                description={item?.created_at}
-              />
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <TextInfo label={'Created At'} description={item?.created_at} />
               <View>
-                <Button mode='contained' onPress={() => Linking.openURL(item?.url)}>
+                <Button
+                  mode='contained'
+                  onPress={() => Linking.openURL(item?.url)}>
                   Apply Now
                 </Button>
               </View>
             </View>
-            <TextInfo 
-              label={'Type'}
-              description={item?.type}
-            />
-            <TextInfo 
-              label={'Title'}
-              description={item?.title}
-            />
-            <TextInfo 
+            <TextInfo label={'Type'} description={item?.type} />
+            <TextInfo label={'Title'} description={item?.title} />
+            <TextInfo
               label={'Fulltime'}
               description={!!item?.full_time ? 'Yes' : 'No'}
             />
-            <TextInfo 
+            <TextInfo
               label={'Description'}
               description={item?.description}
               html
             />
-            <TextInfo 
+            <TextInfo
               label={'How to Apply'}
               description={item?.how_to_apply}
               html

@@ -5,7 +5,7 @@ const ImageCompany = ({ src }) => {
     const defaultImage = '../assets/image/common/404.jpg'
 
     const [img, setImg] = useState(
-      src || require(defaultImage),
+      require(defaultImage),
     )
 
     return (
