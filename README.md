@@ -1,6 +1,10 @@
 ## CariKerja
 Cari kerja is android apps for search opportunities job
 
+## User Login
+username: dans
+password: pro
+
 ## Built With
 [![React Native](https://img.shields.io/badge/ReactNative-0.71.7-blue.svg?style=rounded-square)](https://reactnative.dev/)
 
